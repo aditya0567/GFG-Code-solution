@@ -8,32 +8,32 @@ class Solution {
   public:
     void sort012(vector<int>& arr) {
         // code here
-       int zero=0,one=0,two=0;
-        for(int i=0;i<arr.size();i++){
-            if(arr[i]==0){
-                zero++;
-            }
-            else if(arr[i]==1){
-                one++;
-            }
-            else{
-                two++;
-            }
+          int countZero = 0;
+        int countOne = 0;
+        int countTwo = 0;
+        
+        for(int i=0; i<arr.size(); i++) {
+            
+            if(arr[i] == 0) countZero++;
+            else if(arr[i] == 1) countOne++;
+            else countTwo++;
         }
-        for(int i=0;i<arr.size();i++){
-            if(zero!=0){
-                arr[i]=0;
-                zero--;
+        
+        for(int i=0; i<arr.size(); i++) {
+            if(countZero != 0) {
+                arr[i] = 0;
+                countZero--;
             }
-            else if(zero==0 && one!=0){
-                arr[i]=1;
-                one--;
+            else if(countOne != 0) {
+                arr[i] = 1;
+                countOne--;
             }
-            else{
+            else {
                 arr[i]=2;
-                two--;
+                countTwo--;
             }
         }
+    
     }
 };
 
@@ -63,6 +63,7 @@ int main() {
         }
 
         cout << endl;
+        cout << "~" << endl;
     }
     return 0;
 }
