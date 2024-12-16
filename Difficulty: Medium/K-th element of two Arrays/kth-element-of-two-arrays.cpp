@@ -6,44 +6,21 @@ using namespace std;
 // } Driver Code Ends
 class Solution {
   public:
-    int kthElement(int k, vector<int>& arr1, vector<int>& arr2) {
-    int n = arr1.size(), m = arr2.size();
-    int i = 0, j = 0;
-
-    // Edge cases when one array is empty
-    if (n == 0) return arr2[k-1];
-    if (m == 0) return arr1[k-1];
-    
-    // Handling when k equals the total number of elements
-    if (k == n + m) return max(arr1[n-1], arr2[m-1]);
-    
-    // Finding the k-th element
-    while (i < n && j < m && k > 1) {
-        if (arr1[i] <= arr2[j]) {
-            i++;
-        } else {
-            j++;
+    int kthElement(vector<int>& a, vector<int>& b, int k) {
+        // code here
+            for(int i=0,j=0;k>0;k--){
+            if(k==1){
+                if(j==b.size()) return a[i];
+                if(i==a.size()) return b[j];
+                return min(a[i], b[j]);
+            }
+            if(j==b.size() || (i<a.size() && a[i] < b[j])) i++;
+            else j++;
         }
-        k--;
+        return max(a.back(), b.back());
     }
-    
-    // If remaining elements in arr1
-    while (i < n && k > 1) {
-        i++;
-        k--;
-    }
-    
-    // If remaining elements in arr2
-    while (j < m && k > 1) {
-        j++;
-        k--;
-    }
-    
-    if (i == n) return arr2[j];
-    if (j == m) return arr1[i];
-    return min(arr1[i], arr2[j]);
-}
-    
+
+
 };
 
 //{ Driver Code Starts.
@@ -59,22 +36,22 @@ int main() {
         cin.ignore();
         string input;
         int num;
-        vector<int> arr1, arr2;
+        vector<int> a, b;
 
         getline(cin, input);
         stringstream s2(input);
         while (s2 >> num) {
-            arr1.push_back(num);
+            a.push_back(num);
         }
 
         getline(cin, input);
         stringstream s3(input);
         while (s3 >> num) {
-            arr2.push_back(num);
+            b.push_back(num);
         }
 
         Solution ob;
-        cout << ob.kthElement(k, arr1, arr2) << endl;
+        cout << ob.kthElement(a, b, k) << endl << "~\n";
     }
     return 0;
 }
